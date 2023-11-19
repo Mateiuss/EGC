@@ -172,3 +172,54 @@ Mesh* object2D::CreateHexagon(
 	hexagon->InitFromData(vertices, indices);
 	return hexagon;
 }
+
+Mesh* object2D::CreateCircle(
+	const std::string& name,
+	glm::vec3 color,
+	float radius
+)
+{
+	glm::vec3 corner = glm::vec3(0, 0, 0);
+
+	std::vector<VertexFormat> vertices;
+
+	for (int i = 0; i < 360; i++) {
+		vertices.push_back(VertexFormat(glm::vec3(radius * cos(i * M_PI / 180), radius * sin(i * M_PI / 180), 1), color));
+	}
+
+	Mesh* circle = new Mesh(name);
+	std::vector<unsigned int> indices;
+
+	for (int i = 0; i < 360; i++) {
+		indices.push_back(i);
+	}
+
+	circle->SetDrawMode(GL_TRIANGLE_FAN);
+
+	circle->InitFromData(vertices, indices);
+	return circle;
+}
+
+Mesh* object2D::CreateHeartFill(
+	const std::string& name,
+	glm::vec3 color
+)
+{
+	std::vector<VertexFormat> vertices = {
+		VertexFormat(glm::vec3(-1.55f, -0.87f, 3), color),
+		VertexFormat(glm::vec3(0, -2.5f, 3), color),
+		VertexFormat(glm::vec3(1.55f, -0.87f, 3), color),
+		VertexFormat(glm::vec3(0, 0, 3), color)
+	};
+
+	Mesh* heart = new Mesh(name);
+
+	std::vector<unsigned int> indices = {
+		0, 1, 2,
+		3, 0, 2
+	};
+
+	heart->SetDrawMode(GL_TRIANGLES);
+	heart->InitFromData(vertices, indices);
+	return heart;
+}

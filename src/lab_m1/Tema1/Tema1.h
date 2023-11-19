@@ -6,6 +6,7 @@
 #include "lab_m1/Tema1/object2D.h"
 #include "lab_m1/Tema1/Hexagon.h"
 #include "lab_m1/Tema1/Rectangle.h"
+#include "lab_m1/Tema1/Heart.h"
 
 namespace m1
 {
@@ -31,11 +32,21 @@ namespace m1
         void OnMouseScroll(int mouseX, int mouseY, int offsetX, int offsetY) override;
         void OnWindowResize(int width, int height) override;
 
+        void renderLives();
+        void renderSelectedRhombus();
+        void renderRhombus();
+        void renderHexagon();
+        void renderCollectedStars();
+        void renderCollectableStars();
+        void renderShootingStars();
+        void renderDeletedRhombus();
+        void renderDeletedHexagon();
+
     protected:
         Background background;
         Rhombus* selectedRhombus;
         Hexagon hexagon_types[4];
-        std::vector<Square> lives;
+        std::vector<Heart> lives;
         std::vector<Star> collectableStars;
         std::vector<Star> collectedStars;
         std::vector<Hexagon> hexagons;
@@ -45,6 +56,12 @@ namespace m1
         float starTime;
         float hexagonTime;
         float rombusTime;
+        float gameTime;
+
+        int randomHexTime;
+        int randomRombusTime;
+
+        int nrOfSpawningStars;
         int enemySpawnPoints[3][2];
     };
 }   // namespace m1
